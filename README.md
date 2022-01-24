@@ -35,7 +35,7 @@ npm start
 
 |   Flag   |  Language  | Code |
 | :------: | :--------: | :--: |
-|  :usa:   |  English   |  en  |
+|   :us:   |  English   |  en  |
 | :brazil: | Portuguese |  pt  |
 
 `e.g.`:
