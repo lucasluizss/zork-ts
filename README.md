@@ -15,7 +15,13 @@ Zork was directly inspired by the first text adventure game, Colossal Cave Adven
 
 ## Setup
 
-First of all you need to install the dependencies running the command below:
+### Requirements
+
+- [nodejs](https://nodejs.org/en/download/)
+
+### Installing dependencies
+
+First of all you need to install the dependencies running the command below in your terminal:
 
 ```shell
 npm install
