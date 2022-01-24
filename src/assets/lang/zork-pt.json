@@ -1,0 +1,42 @@
+{
+	"message": {
+		"Welcome to Zork - The Unofficial TypeScript Version.": "Bem-vindo ao Zork - A versão não oficial do TypeScript.",
+		"You are standing in an open field west of a white house, with a boarded front door.": "Você está de pé em um campo aberto a oeste de uma casa branca, com uma porta da frente com tábuas.",
+		"(A secret path leads southwest into the forest.)": "(Um caminho secreto leva a sudoeste na floresta.)",
+		"There is a Small Mailbox.": "Há uma caixa de correio pequeno.",
+		"What do you do? ": "\nO que você faz? ",
+		"Do you want to continue? (Y/N) ": "\nVocê quer continuar? (S/N) ",
+		"This is a forest, with trees in all directions. To the east, there appears to be sunlight.": "Esta é uma floresta, com árvores em todas as direções. A leste, parece haver luz solar.",
+		"You are in a clearing, with a forest surrounding you on all sides. A path leads south.": "Você está em uma clareira, com uma floresta ao seu redor por todos os lados. Um caminho leva ao sul.",
+		"There is an open grating, descending into darkness.": "Há uma grade aberta, com escadas descendo para a escuridão.",
+		"You are in a tiny cave with a dark, forbidding staircase leading down.": "Você está em uma pequena caverna com uma escada escura e proibitiva que desce.",
+		"There is a skeleton of a human male in one corner.": "Há um esqueleto de um homem humano em um canto."
+	},
+	"rightAnswer": [
+		"ir para o sudoeste",
+		"ir para o leste",
+		"descer escada",
+		["descer escadas", "descer escada", "ir pelas escadas"],
+		"abrir baú"
+	],
+	"history": {
+		"pegue a caixa de correio": "Está ancorado com segurança.",
+		"abra a caixa de correio": "Abrir a pequena caixa de correio revela um folheto.",
+		"vá para o leste": "A porta está tapada e você não pode remover as tábuas.",
+		"abrir a porta": "A porta não pode ser aberta.",
+		"pegue as pranchas": "As pranchas estão bem presas.",
+		"olhar para casa": "A casa é uma bela casa colonial pintada de branco. É claro que os proprietários devem ter sido extremamente ricos.",
+		"ler folheto": "Bem-vindo à versão não oficial do Zork escrito com TypeScript. Sua missão é encontrar uma Estátua de Jade.",
+		"vá para oeste": "Você precisaria de um facão para ir mais para o oeste.",
+		"ir para o norte": "A floresta se torna impenetrável ao norte.",
+		"vá para o sul": "Árvores atiradas pela tempestade bloqueiam seu caminho.",
+		"vá para o sul novamente": "Você vê um grande ogro e se vira.",
+		"pegue o esqueleto": "Por que você faria isso? Você é algum tipo de doente?",
+		"esmagar esqueleto": "Pessoa doente. Tenha algum respeito amigo.",
+		"iluminar o quarto": "Você precisaria de uma tocha ou lâmpada para fazer isso.",
+		"quebrar esqueleto": "Tenho duas perguntas: Por que e com o quê?",
+		"suicídio": "Você se joga escada abaixo como uma tentativa de suicídio. Você morre.",
+		"me matar": "Você se joga escada abaixo como uma tentativa de suicídio. Você morre.",
+		"abrir porta-malas": "Você encontrou a Estátua de Jade e completou sua missão!"
+	}
+}
