@@ -5,8 +5,16 @@
 </div>
 <br>
 <div align="center">
-	<img alt="Made by lucasluizss" src="https://img.shields.io/badge/made%20by-lucasluizss-%2304D361" width="120" />
-	<img alt="Made by lucasluizss" src="https://img.shields.io/github/license/lucasluizss/zork-ts" width="120" />
+	<img alt="Made by lucasluizss" src="https://img.shields.io/badge/made%20by-lucasluizss-%2304D361" />
+	<img alt="x-Ts" src="https://badgen.net/badge/icon/typescript?icon=typescript&label">
+	<img alt="License" src="https://img.shields.io/github/license/lucasluizss/zork-ts" />
+	<img alt="github downloads" src="https://img.shields.io/github/downloads/lucasluizss/zork-ts/total.svg">
+	<a href="https://open.vscode.dev/lucasluizss/zork-ts">
+	    <img alt="open with vscode" src="https://open.vscode.dev/badges/open-in-vscode.svg">
+	</a>
+	<a href="https://GitHub.com/lucasluizss/zork-ts/stargazers/">
+	    <img alt="github stars" src="https://img.shields.io/github/stars/lucasluizss/zork-ts.svg?style=social&label=Star&maxAge=2592000">
+	</a>
 </div>
 <hr>
 
