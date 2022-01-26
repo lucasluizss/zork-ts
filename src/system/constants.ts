@@ -31,10 +31,14 @@ export const BgCyan = '\x1b[46m';
 export const BgWhite = '\x1b[47m';
 
 export const ConfirmOptions = ['y', 's', 'yes', 'sim'];
+export const DeadMessage = 'Suicide';
 export const DeadOptions = [
 	'suicídio',
 	'suicide',
 	'kill me',
-	'me matar',
+	'mate-me',
 	'kill myself',
+	'me matar',
+	'pular no abismo',
+	'saltar para a morte',
 ];

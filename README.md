@@ -32,6 +32,7 @@ Zork was directly inspired by the first text adventure game, Colossal Cave Adven
 First of all you need to install the dependencies running the command below in your terminal:
 
 ```shell
+cd zork-ts
 npm install
 ```
 
