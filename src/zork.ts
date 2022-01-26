@@ -5,6 +5,7 @@ import {
 	DeadOptions,
 	ConfirmOptions,
 	DeadMessage,
+	VictoryMessage,
 } from './system/constants';
 import { Part } from './system/part';
 import {
@@ -78,6 +79,10 @@ class Zork {
 			}
 
 			this.clearAnswer();
+		}
+
+		if (this.correctAnswer(Part.V) && VictoryMessage !== this.answer) {
+			success(interactions[Part.V][VictoryMessage]);
 		}
 
 		await this.askToLeave();

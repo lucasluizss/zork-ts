@@ -9,7 +9,7 @@
 		"II": "✅ Esta é uma floresta, com árvores em todas as direções. A leste, parece haver luz do sol.",
 		"III": "✅ Você está em uma clareira, com uma floresta ao seu redor por todos os lados. Um caminho leva ao sul. 🧭\nHá uma grade aberta, e escadas descendo para a escuridão.",
 		"IV": "✅ Você está em uma pequena caverna com uma escada escura e proibida que leva para baixo.\n 💀 Há um esqueleto de um homem humano em um canto.",
-		"V": "✅ Você entrou em uma sala com chão de barro.\n ✅ Deitado meio enterrado na lama está um baú velho, cheio de joias."
+		"V": "✅ Você entrou em uma sala com chão de barro.\n Deitado meio enterrado na lama está um baú velho, cheio de joias."
 	},
 	"availableAnswers": {
 		"I": ["vá para o sudoeste", "ir para sudoeste", "ir para o sudoeste"],
@@ -39,9 +39,9 @@
 		},
 		"IV": {
 			"pegue o esqueleto": "Por que você faria isso? Você é algum tipo de doente?",
-			"esmague esqueleto": "Pessoa doente. Tenha algum respeito amigo.",
+			"esmague o esqueleto": "Pessoa doente. Tenha algum respeito amigo.",
 			"ilumine o quarto": "💡 Você precisaria de uma tocha ou lâmpada para fazer isso.",
-			"quebrar esqueleto": "Tenho duas perguntas: Por que e com o quê?"
+			"quebrar o esqueleto": "Tenho duas perguntas: Por que e com o quê?"
 		},
 		"V": {
 			"abrir baú": "🎉 Você encontrou a Estátua de Jade 🏆 e completou sua missão! 🎉"

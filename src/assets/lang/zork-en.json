@@ -9,7 +9,7 @@
 		"II": "✅ This is a forest, with trees in all directions. To the east, there appears to be sunlight.",
 		"III": "✅ You are in a clearing, with a forest surrounding you on all sides. A path leads south. 🧭\nThere is an open grating, descending into darkness.",
 		"IV": "✅ You are in a tiny cave with a dark, forbidding staircase leading down.\n 💀 There is a skeleton of a human male in one corner.",
-		"V": "✅ You have entered a mud-floored room.\n ✅ Lying half buried in the mud is an old trunk, bulging with jewels."
+		"V": "✅ You have entered a mud-floored room.\n Lying half buried in the mud is an old trunk, bulging with jewels."
 	},
 	"availableAnswers": {
 		"I": ["go southwest"],

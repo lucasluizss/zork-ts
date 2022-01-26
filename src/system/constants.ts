@@ -32,6 +32,7 @@ export const BgWhite = '\x1b[47m';
 
 export const ConfirmOptions = ['y', 's', 'yes', 'sim'];
 export const DeadMessage = 'Suicide';
+export const VictoryMessage = 'abrir baú';
 export const DeadOptions = [
 	'suicídio',
 	'suicide',
