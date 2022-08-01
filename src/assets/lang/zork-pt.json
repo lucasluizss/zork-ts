@@ -3,8 +3,7 @@
 		"What do you do? ": "\nO que você faz? ",
 		"Do you want to continue? (Y/N) ": "\nVocê deseja continuar? (S/N) ",
 		"Suicide": "Você se joga escada abaixo como uma tentativa de suicídio. Você morre. 💀",
-		"Keep trying, your answer still doesn't fit the story...": "Continue tentando, sua resposta ainda não se encaixa na história...",
-		"Welcome to Zork - The Unofficial TypeScript Version.": "🎈 Bem-vindo ao Zork - A versão não oficial escrita em TypeScript. 🎈",
+		"Try again": "Continue tentando, sua resposta está #percent% correta...",
 		"I": "✅ Oeste da casa 🏠\n Você está de pé em um campo aberto a oeste de uma casa branca, com uma porta da frente com tábuas. 🚪\n Há uma pequena caixa de correio aqui. 📫",
 		"II": "✅ Esta é uma floresta, com árvores em todas as direções. A leste, parece haver luz do sol.",
 		"III": "✅ Você está em uma clareira, com uma floresta ao seu redor por todos os lados. Um caminho leva ao sul. 🧭\nHá uma grade aberta, e escadas descendo para a escuridão.",
@@ -13,32 +12,32 @@
 	},
 	"availableAnswers": {
 		"I": [
+			"vou para o sudoeste",
 			"va para o sudoeste",
 			"ir para sudoeste",
 			"ir para o sudoeste",
-			"vou para sudoeste",
-			"vou para o sudoeste"
+			"vou para sudoeste"
 		],
 		"II": [
+			"vou para o leste",
 			"va para o leste",
 			"ir para leste",
 			"ir para o leste",
-			"vou para leste",
-			"vou para o leste"
+			"vou para leste"
 		],
 		"III": [
+			"desco as escadas",
 			"descer escada",
 			"descer as escadas",
 			"desca as escadas",
-			"desco as escadas",
 			"desco pelas escadas",
 			"desco a escada"
 		],
 		"IV": [
+			"desco as escadas",
 			"descer escada",
 			"descer as escadas",
 			"desca as escadas",
-			"desco as escadas",
 			"desco pelas escadas",
 			"desco a escada"
 		],

@@ -53,24 +53,24 @@ class Main {
 	}
 
 	private startBot() {
-		this.bot.start(ctx =>
-			this.languageSelection(ctx)
-				.then(() => this.greetings(ctx))
-				.catch(error => this.sendErrorMessage(error))
-		);
+		this.bot.start(ctx => {
+			this.languageSelection(ctx).catch(error => this.sendErrorMessage(error));
+		});
 	}
 
 	private async languageSelection(ctx: ZorkContext) {
 		return await ctx.reply(
-			`Hi, ${ctx?.from?.first_name}! Please select your language.\n(For available commands press /help)`,
-			Markup.keyboard(['🇧🇷 PT-BR', '🇺🇸 EN-US']).oneTime().resize()
+			`Hi, ${ctx?.from?.first_name}!
+			\n🎈 Welcome to Zork - The Unofficial TypeScript Version. 🎈
+			\nPlease select your language.\n(For available commands press /help)`,
+			Markup.keyboard(['🇧🇷 PT-BR', '🇺🇸 EN-US']).oneTime(true).resize()
 		);
 	}
 
 	private observableActions() {
 		this.bot.hears('🇧🇷 PT-BR', ctx => this.changeLanguage(ctx, 'pt'));
 		this.bot.hears('🇺🇸 EN-US', ctx => this.changeLanguage(ctx, 'en'));
-		this.bot.hears('Play Again', ctx => this.greetings(ctx));
+		this.bot.hears('Play Again', ctx => this.restart(ctx));
 	}
 
 	private changeLanguage(ctx: ZorkContext, language: string) {
@@ -78,16 +78,6 @@ class Main {
 		const currentChapter = ctx?.session?.currentChapter ?? Part.I;
 		ctx.session = { answer: '', currentChapter, translation, language };
 		this.currentChapter(ctx);
-	}
-
-	private greetings(ctx: ZorkContext) {
-		setTimeout(() => {
-			ctx.reply(
-				ctx.session.translation.message[
-					'Welcome to Zork - The Unofficial TypeScript Version.'
-				]
-			);
-		}, 500);
 	}
 
 	private getTranslation(language: string) {
@@ -137,10 +127,7 @@ class Main {
 			ctx.reply('Send /info to get info about the game');
 		});
 
-		this.bot.command('restart', ctx => {
-			this.iterator = this.iteratorTemp;
-			this.greetings(ctx);
-		});
+		this.bot.command('restart', ctx => this.restart(ctx));
 
 		this.bot.command('language', ctx => this.languageSelection(ctx));
 
@@ -153,6 +140,11 @@ class Main {
 				},
 			});
 		});
+	}
+
+	private restart(ctx: ZorkContext) {
+		this.iterator = this.iteratorTemp;
+		this.currentChapter(ctx);
 	}
 
 	private userInput() {
@@ -177,14 +169,14 @@ class Main {
 	}
 
 	private incorrectAnswer(ctx: ZorkContext, incorrectAnswer: string) {
-		const correctAnswer =
+		const [correctAnswer] =
 			ctx.session.translation.availableAnswers[ctx.session.currentChapter];
 
-		ctx.reply(
-			ctx.session.translation.message[
-				"Keep trying, your answer still doesn't fit the story..."
-			] + ` ${similarityService.calculate(correctAnswer, incorrectAnswer) * 100}% correct`
-		);
+		const percent = (
+			similarityService.calculate(correctAnswer, incorrectAnswer) * 100
+		).toFixed(2);
+
+		ctx.reply(ctx.session.translation.message['Try again'].replace('#percent', percent));
 	}
 
 	private isLastChapter(ctx: ZorkContext) {
