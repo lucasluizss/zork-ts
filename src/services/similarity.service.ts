@@ -7,7 +7,7 @@
  */
 
 class SimilarityService {
-	public calculate(s1: string, s2: string): number {
+	public calculate(s1 = '', s2 = ''): number {
 		let longer = s1;
 		let shorter = s2;
 

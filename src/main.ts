@@ -180,7 +180,7 @@ class Main {
 	}
 
 	private isLastChapter(ctx: ZorkContext) {
-		return ctx.session.currentChapter === Part.V;
+		return ctx.session.currentChapter === Part.VI;
 	}
 
 	private parseUserInput(text: string) {
