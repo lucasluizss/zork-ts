@@ -80,11 +80,13 @@ class Main {
 	}
 
 	private greetings(ctx: ZorkContext) {
-		ctx.reply(
-			ctx.session.translation.message[
-				'Welcome to Zork - The Unofficial TypeScript Version.'
-			]
-		);
+		setTimeout(() => {
+			ctx.reply(
+				ctx.session.translation.message[
+					'Welcome to Zork - The Unofficial TypeScript Version.'
+				]
+			);
+		}, 500);
 	}
 
 	private getTranslation(language: string) {
