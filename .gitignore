@@ -1,0 +1,6 @@
+node_modules/*
+*.js
+*.DS_store
+*.env
+dist
+*.sh
