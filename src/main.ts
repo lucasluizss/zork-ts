@@ -14,6 +14,7 @@ import { Markup, session, Telegraf, Telegram } from 'telegraf';
 
 import { Part } from './models/Part';
 import { ZorkContext } from './models/ZorkContext';
+import similarityService from './services/similarity.service';
 
 const token = process.env.BOT_TOKEN as string;
 const mapURI = process.env.MAP_URI as string;
@@ -170,13 +171,20 @@ class Main {
 					this.gameCompleted(ctx);
 				}
 			} else {
-				ctx.reply(
-					ctx.session.translation.message[
-						"Keep trying, your answer still doesn't fit the story..."
-					]
-				);
+				this.incorrectAnswer(ctx, answer);
 			}
 		});
+	}
+
+	private incorrectAnswer(ctx: ZorkContext, incorrectAnswer: string) {
+		const correctAnswer =
+			ctx.session.translation.availableAnswers[ctx.session.currentChapter];
+
+		ctx.reply(
+			ctx.session.translation.message[
+				"Keep trying, your answer still doesn't fit the story..."
+			] + ` ${similarityService.calculate(correctAnswer, incorrectAnswer) * 100}% correct`
+		);
 	}
 
 	private isLastChapter(ctx: ZorkContext) {
