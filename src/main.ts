@@ -52,9 +52,11 @@ class Main {
 	}
 
 	private startBot() {
-		this.bot.start(ctx => {
-			this.languageSelection(ctx).catch(error => this.sendErrorMessage(error));
-		});
+		this.bot.start(ctx =>
+			this.languageSelection(ctx)
+				.then(() => this.greetings(ctx))
+				.catch(error => this.sendErrorMessage(error))
+		);
 	}
 
 	private async languageSelection(ctx: ZorkContext) {
@@ -83,7 +85,6 @@ class Main {
 				'Welcome to Zork - The Unofficial TypeScript Version.'
 			]
 		);
-		this.nextChapter(ctx);
 	}
 
 	private getTranslation(language: string) {
@@ -163,8 +164,8 @@ class Main {
 			} else if (correctInteration) {
 				ctx.reply(correctInteration);
 
-				if (ctx.session.currentChapter === Part.V) {
-					this.nextChapter(ctx);
+				if (this.isLastChapter(ctx)) {
+					this.gameCompleted(ctx);
 				}
 			} else {
 				ctx.reply(
@@ -174,6 +175,10 @@ class Main {
 				);
 			}
 		});
+	}
+
+	private isLastChapter(ctx: ZorkContext) {
+		return ctx.session.currentChapter === Part.V;
 	}
 
 	private parseUserInput(text: string) {

@@ -25,7 +25,7 @@
 			"go east": "The door is boarded and you cannot remove the boards.",
 			"open door": "The door cannot be opened.",
 			"take boards": "The boards are securely fastened.",
-			"look at house": "The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
+			"look at house": "🏠 The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
 			"read leaflet": "🎈 WELCOME TO ZORK the Unofficial TypeScript Version of Zork. 🎈\n ZORK is a game of adventure, danger, and low cunning. ☠️ \n In it you will explore some of the most amazing territory ever seen by mortals. 🗺️ \n No computer should be without one! 💻",
 			"drop leaflet": "Dropped."
 		},
