@@ -4,5 +4,4 @@ export enum Part {
 	III = 'III',
 	IV = 'IV',
 	V = 'V',
-	VI = 'VI',
 }

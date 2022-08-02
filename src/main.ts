@@ -114,6 +114,15 @@ class Main {
 		);
 	}
 
+	private gameOver(ctx: ZorkContext) {
+		ctx.reply(
+			'Game over!',
+			Markup.keyboard([['Play Again']])
+				.oneTime()
+				.resize()
+		);
+	}
+
 	private *chaptersGenerator() {
 		yield* [Part.I, Part.II, Part.III, Part.IV, Part.V];
 	}
@@ -164,6 +173,10 @@ class Main {
 				}
 			} else {
 				this.incorrectAnswer(ctx, answer);
+
+				if (this.isLastChapter(ctx)) {
+					this.gameOver(ctx);
+				}
 			}
 		});
 	}
@@ -180,7 +193,7 @@ class Main {
 	}
 
 	private isLastChapter(ctx: ZorkContext) {
-		return ctx.session.currentChapter === Part.VI;
+		return ctx.session.currentChapter === Part.V;
 	}
 
 	private parseUserInput(text: string) {
