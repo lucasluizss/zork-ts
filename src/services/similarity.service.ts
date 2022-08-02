@@ -25,7 +25,7 @@ class SimilarityService {
 		return (longerLength - this.editDistance(longer, shorter)) / longerLength;
 	}
 
-	private editDistance(s1: string, s2: string) {
+	private editDistance(s1: string, s2: string): number {
 		s1 = s1.toLowerCase();
 		s2 = s2.toLowerCase();
 

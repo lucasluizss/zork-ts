@@ -32,14 +32,14 @@ class Zork {
 		this.showGreetings();
 	}
 
-	private showGreetings() {
+	private showGreetings(): void {
 		line(BgMagenta, FgWhite);
 		print(message['Welcome to Zork - The Unofficial TypeScript Version.']);
 		line();
 		print(Reset);
 	}
 
-	public async play() {
+	public async play(): Promise<void> {
 		for (let currentPart of this.chapters) {
 			let remainingAttemptsForHint = HintsCount;
 
@@ -73,12 +73,12 @@ class Zork {
 		await this.askToLeave();
 	}
 
-	private correctAnswer = (chapter: Part) =>
+	private correctAnswer = (chapter: Part): boolean =>
 		availableAnswers[chapter].includes(this.answer);
 
-	private clearAnswer = () => (this.answer = undefined);
+	private clearAnswer = (): void => (this.answer = undefined);
 
-	private async askToLeave() {
+	private async askToLeave(): Promise<void> {
 		const confirm = await input(message['Do you want to continue? (Y/N) ']);
 
 		if (ConfirmOptions.includes(confirm)) {
