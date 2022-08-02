@@ -11,24 +11,28 @@
 import 'dotenv/config';
 import fs from 'node:fs';
 import { Markup, session, Telegraf, Telegram } from 'telegraf';
+import { Message } from 'typegram/message';
 
 import { Part } from './models/Part';
 import { ZorkContext } from './models/ZorkContext';
+import { TranslationData } from './models/TranslationData';
 import similarityService from './services/similarity.service';
 
 const token = process.env.BOT_TOKEN as string;
 const mapURI = process.env.MAP_URI as string;
 const chatId = process.env.CHAT_ID as string;
 const homePageURL = process.env.HOME_PAGE as string;
+const userMaximumAttempts = Number(process.env.USER_MAXIMUM_ATTEMPTS) ?? 10;
 
 class Main {
+	private userAttempts: number;
 	private telegram: Telegram;
 	private bot: Telegraf<ZorkContext>;
 
 	private iterator = this.chaptersGenerator();
 	private iteratorTemp = this.chaptersGenerator();
 
-	public initialize() {
+	public initialize(): void {
 		try {
 			this.createInstances();
 			this.initializeSession();
@@ -43,22 +47,39 @@ class Main {
 		}
 	}
 
-	private createInstances() {
+	private createInstances(): void {
+		this.resetUserAttempts();
 		this.telegram = new Telegram(token);
 		this.bot = new Telegraf<ZorkContext>(token);
 	}
 
-	private initializeSession() {
+	private increaseUserAttempts(): void {
+		this.userAttempts++;
+	}
+
+	private resetUserAttempts(): void {
+		this.userAttempts = 0;
+	}
+
+	private get remainingUserAttempts(): number {
+		return userMaximumAttempts - this.userAttempts;
+	}
+
+	private get maximumAttemptsReachedByTheUser(): boolean {
+		return this.userAttempts >= userMaximumAttempts;
+	}
+
+	private initializeSession(): void {
 		this.bot.use(session());
 	}
 
-	private startBot() {
+	private startBot(): void {
 		this.bot.start(ctx => {
 			this.languageSelection(ctx).catch(error => this.sendErrorMessage(error));
 		});
 	}
 
-	private async languageSelection(ctx: ZorkContext) {
+	private async languageSelection(ctx: ZorkContext): Promise<Message.TextMessage> {
 		return await ctx.reply(
 			`Hi, ${ctx?.from?.first_name}!
 			\n🎈 Welcome to Zork - The Unofficial TypeScript Version. 🎈
@@ -67,20 +88,20 @@ class Main {
 		);
 	}
 
-	private observableActions() {
+	private observableActions(): void {
 		this.bot.hears('🇧🇷 PT-BR', ctx => this.changeLanguage(ctx, 'pt'));
 		this.bot.hears('🇺🇸 EN-US', ctx => this.changeLanguage(ctx, 'en'));
 		this.bot.hears('Play Again', ctx => this.restart(ctx));
 	}
 
-	private changeLanguage(ctx: ZorkContext, language: string) {
+	private changeLanguage(ctx: ZorkContext, language: string): void {
 		const translation = this.getTranslation(language);
 		const currentChapter = ctx?.session?.currentChapter ?? Part.I;
 		ctx.session = { answer: '', currentChapter, translation, language };
 		this.currentChapter(ctx);
 	}
 
-	private getTranslation(language: string) {
+	private getTranslation(language: string): TranslationData {
 		const translationFilePath = `${process.cwd()}/src/assets/lang/zork-${language}.json`;
 		const translationJSON = fs.readFileSync(translationFilePath, {
 			encoding: 'utf-8',
@@ -88,7 +109,7 @@ class Main {
 		return JSON.parse(translationJSON);
 	}
 
-	private nextChapter(ctx: ZorkContext) {
+	private nextChapter(ctx: ZorkContext): void {
 		const { done, value: currentPart } = this.iterator.next();
 
 		if (!done) {
@@ -99,35 +120,26 @@ class Main {
 		}
 	}
 
-	private currentChapter(ctx: ZorkContext) {
+	private currentChapter(ctx: ZorkContext): void {
 		ctx.reply(ctx.session.translation.message[ctx.session.currentChapter]);
 		setTimeout(() => ctx.reply(ctx.session.translation.message['What do you do? ']), 500);
 	}
 
-	private gameCompleted(ctx: ZorkContext) {
+	private gameCompleted(ctx: ZorkContext, message?: string): void {
 		ctx.replyWithPhoto(mapURI);
 		ctx.reply(
-			'Game completed',
+			message ?? 'Game completed!',
 			Markup.keyboard([['Play Again']])
 				.oneTime()
 				.resize()
 		);
 	}
 
-	private gameOver(ctx: ZorkContext) {
-		ctx.reply(
-			'Game over!',
-			Markup.keyboard([['Play Again']])
-				.oneTime()
-				.resize()
-		);
-	}
-
-	private *chaptersGenerator() {
+	private *chaptersGenerator(): Generator<Part, void, undefined> {
 		yield* [Part.I, Part.II, Part.III, Part.IV, Part.V];
 	}
 
-	private usefulCommands() {
+	private usefulCommands(): void {
 		this.bot.help(ctx => {
 			ctx.reply('Send /start to start the game');
 			ctx.reply('Send /restart to restart the game');
@@ -151,37 +163,39 @@ class Main {
 		});
 	}
 
-	private restart(ctx: ZorkContext) {
+	private restart(ctx: ZorkContext): void {
 		this.iterator = this.iteratorTemp;
 		this.currentChapter(ctx);
 	}
 
-	private userInput() {
+	private userInput(): void {
 		this.bot.on('text', ctx => {
+			this.increaseUserAttempts();
 			const answer = this.parseUserInput(ctx.message.text);
 
 			const correctInteration =
 				ctx.session.translation.interactions[ctx.session.currentChapter][answer];
 
 			if (this.correctAnswer(ctx, answer)) {
+				this.resetUserAttempts();
 				this.nextChapter(ctx);
 			} else if (correctInteration) {
 				ctx.reply(correctInteration);
 
 				if (this.isLastChapter(ctx)) {
-					this.gameCompleted(ctx);
+					this.gameCompleted(ctx, correctInteration);
 				}
 			} else {
 				this.incorrectAnswer(ctx, answer);
 
-				if (this.isLastChapter(ctx)) {
-					this.gameOver(ctx);
+				if (this.isLastChapter(ctx) && this.maximumAttemptsReachedByTheUser) {
+					this.gameCompleted(ctx, ctx.session.translation.message['Game Over']);
 				}
 			}
 		});
 	}
 
-	private incorrectAnswer(ctx: ZorkContext, incorrectAnswer: string) {
+	private incorrectAnswer(ctx: ZorkContext, incorrectAnswer: string): void {
 		const [correctAnswer] =
 			ctx.session.translation.availableAnswers[ctx.session.currentChapter];
 
@@ -189,14 +203,18 @@ class Main {
 			similarityService.calculate(correctAnswer, incorrectAnswer) * 100
 		).toFixed(2);
 
-		ctx.reply(ctx.session.translation.message['Try again'].replace('#percent', percent));
+		ctx.reply(
+			ctx.session.translation.message['Try again']
+				.replace('#percent', percent)
+				.replace('#attempts', this.remainingUserAttempts)
+		);
 	}
 
-	private isLastChapter(ctx: ZorkContext) {
+	private isLastChapter(ctx: ZorkContext): boolean {
 		return ctx.session.currentChapter === Part.V;
 	}
 
-	private parseUserInput(text: string) {
+	private parseUserInput(text: string): string {
 		return text
 			.normalize('NFD')
 			.replace(/[\u0300-\u036f]/g, '')
@@ -205,17 +223,17 @@ class Main {
 			.trim();
 	}
 
-	private launchBot() {
+	private launchBot(): void {
 		this.bot.launch();
 	}
 
-	private correctAnswer(ctx: ZorkContext, answer: string) {
+	private correctAnswer(ctx: ZorkContext, answer: string): boolean {
 		return ctx.session.translation.availableAnswers[ctx.session.currentChapter].includes(
 			answer
 		);
 	}
 
-	private sendErrorMessage(error: any) {
+	private sendErrorMessage(error: any): void {
 		console.log(error);
 
 		if (chatId) {
@@ -223,7 +241,7 @@ class Main {
 		}
 	}
 
-	private listeners() {
+	private listeners(): void {
 		process.once('SIGINT', () => this.bot.stop('SIGINT'));
 		process.once('SIGTERM', () => this.bot.stop('SIGTERM'));
 	}
