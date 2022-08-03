@@ -222,10 +222,6 @@ class Main {
 		);
 	}
 
-	private isLastChapter(ctx: ZorkContext): boolean {
-		return ctx.session.currentChapter === Part.V;
-	}
-
 	private parseUserInput(text: string): string {
 		return text
 			.normalize('NFD')
