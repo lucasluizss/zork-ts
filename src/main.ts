@@ -22,7 +22,7 @@ const token = process.env.BOT_TOKEN as string;
 const mapURI = process.env.MAP_URI as string;
 const chatId = process.env.CHAT_ID as string;
 const homePageURL = process.env.HOME_PAGE as string;
-const userMaximumAttempts = Number(process.env.USER_MAXIMUM_ATTEMPTS) ?? 10;
+const userMaximumAttempts = parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '') ?? 10;
 
 class Main {
 	private userAttempts: number;
@@ -96,7 +96,7 @@ class Main {
 
 	private changeLanguage(ctx: ZorkContext, language: string): void {
 		const translation = this.getTranslation(language);
-		const currentChapter = ctx?.session?.currentChapter ?? Part.I;
+		const currentChapter = ctx?.session?.currentChapter ?? this.iterator.next().value;
 		ctx.session = { answer: '', currentChapter, translation, language };
 		this.currentChapter(ctx);
 	}
