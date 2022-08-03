@@ -165,6 +165,7 @@ class Main {
 
 	private restart(ctx: ZorkContext): void {
 		this.iterator = this.iteratorTemp;
+		ctx.session.currentChapter = this.iterator.next().value as Part;
 		this.currentChapter(ctx);
 	}
 
