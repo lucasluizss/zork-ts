@@ -10,19 +10,14 @@
 
 import 'dotenv/config';
 import fs from 'node:fs';
-import { Markup, session, Telegraf, Telegram } from 'telegraf';
 import { Message } from 'typegram/message';
+import { Markup, session, Telegraf, Telegram } from 'telegraf';
 
 import { Part } from './models/Part';
 import { ZorkContext } from './models/ZorkContext';
 import { TranslationData } from './models/TranslationData';
 import similarityService from './services/similarity.service';
-
-const token = process.env.BOT_TOKEN as string;
-const mapURI = process.env.MAP_URI as string;
-const chatId = process.env.CHAT_ID as string;
-const homePageURL = process.env.HOME_PAGE as string;
-const userMaximumAttempts = parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '10') ?? 10;
+import configurationService from './services/configuration.service';
 
 class Main {
 	private userAttempts: number;
@@ -30,7 +25,6 @@ class Main {
 	private bot: Telegraf<ZorkContext>;
 
 	private iterator = this.chaptersGenerator();
-	private iteratorTemp = this.chaptersGenerator();
 
 	public initialize(): void {
 		try {
@@ -49,8 +43,8 @@ class Main {
 
 	private createInstances(): void {
 		this.resetUserAttempts();
-		this.telegram = new Telegram(token);
-		this.bot = new Telegraf<ZorkContext>(token);
+		this.telegram = new Telegram(configurationService.token);
+		this.bot = new Telegraf<ZorkContext>(configurationService.token);
 	}
 
 	private increaseUserAttempts(): void {
@@ -62,11 +56,11 @@ class Main {
 	}
 
 	private get remainingUserAttempts(): number {
-		return userMaximumAttempts - this.userAttempts;
+		return configurationService.userMaximumAttempts - this.userAttempts;
 	}
 
 	private get maximumAttemptsReachedByTheUser(): boolean {
-		return this.userAttempts >= userMaximumAttempts;
+		return this.userAttempts >= configurationService.userMaximumAttempts;
 	}
 
 	private initializeSession(): void {
@@ -126,7 +120,7 @@ class Main {
 	}
 
 	private gameCompleted(ctx: ZorkContext, message?: string): void {
-		ctx.replyWithPhoto(mapURI);
+		ctx.replyWithPhoto(configurationService.mapURI);
 		ctx.reply(
 			message ?? 'Game completed!',
 			Markup.keyboard([['Play Again']])
@@ -157,14 +151,16 @@ class Main {
 		this.bot.command('info', ctx => {
 			ctx.reply(`Hi, ${ctx.from.first_name}! Here are some important infos.`, {
 				reply_markup: {
-					inline_keyboard: [[{ text: 'How to contribute', url: homePageURL }]],
+					inline_keyboard: [
+						[{ text: 'How to contribute', url: configurationService.homePageURL }],
+					],
 				},
 			});
 		});
 	}
 
 	private restart(ctx: ZorkContext): void {
-		this.iterator = this.iteratorTemp;
+		this.iterator = this.chaptersGenerator();
 		ctx.session.currentChapter = this.iterator.next().value as Part;
 		this.currentChapter(ctx);
 	}
@@ -237,8 +233,11 @@ class Main {
 	private sendErrorMessage(error: any): void {
 		console.log(error);
 
-		if (chatId) {
-			this.telegram.sendMessage(chatId, JSON.stringify(error));
+		if (configurationService.chatId) {
+			this.telegram.sendMessage(
+				configurationService.chatId,
+				JSON.stringify(error, null, 2)
+			);
 		}
 	}
 
