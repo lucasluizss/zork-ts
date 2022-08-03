@@ -22,7 +22,7 @@ const token = process.env.BOT_TOKEN as string;
 const mapURI = process.env.MAP_URI as string;
 const chatId = process.env.CHAT_ID as string;
 const homePageURL = process.env.HOME_PAGE as string;
-const userMaximumAttempts = parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '') ?? 10;
+const userMaximumAttempts = parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '10') ?? 10;
 
 class Main {
 	private userAttempts: number;
