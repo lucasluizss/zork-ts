@@ -77,15 +77,15 @@ class Main {
 
 	private async mission(ctx: ZorkContext): Promise<void> {
 		await ctx.reply(
-			`Hi, ${ctx?.from?.first_name}!
+			`Hi 👋, ${ctx?.from?.first_name}!
 			\n🎈 Welcome to Zork - The Unofficial TypeScript Version. 🎈
-			\n> Your mission is to find the Jade Statue 🏆 \n`
+			\n👉 Your mission is to find the Jade Statue 🏆 \n`
 		);
 	}
 
 	private async languageSelection(ctx: ZorkContext): Promise<Message.TextMessage> {
 		return await ctx.reply(
-			`> Please select your language.\n(For available commands press /help)`,
+			`👉 Please select your language.\n(For available commands press /help)`,
 			Markup.keyboard(['🇧🇷 PT-BR', '🇺🇸 EN-US']).oneTime(true).resize()
 		);
 	}
@@ -144,11 +144,11 @@ class Main {
 
 	private usefulCommands(): void {
 		this.bot.help(ctx => {
-			ctx.reply('Send /start to start the game');
-			ctx.reply('Send /restart to restart the game');
-			ctx.reply('Send /language select a new idiom');
-			ctx.reply('Send /chapter to get the current chapter description');
-			ctx.reply('Send /info to get info about the game');
+			ctx.reply('🏁 Send /start to start the game');
+			ctx.reply('⌛ Send /restart to restart the game');
+			ctx.reply('🌐 Send /language select a new idiom');
+			ctx.reply('📖 Send /chapter to get the current chapter description');
+			ctx.reply('ℹ️ Send /info to get info about the game');
 		});
 
 		this.bot.command('restart', ctx => this.validateSession(ctx, this.restart));
@@ -158,7 +158,7 @@ class Main {
 		this.bot.command('chapter', ctx => this.validateSession(ctx, this.currentChapter));
 
 		this.bot.command('info', ctx => {
-			ctx.reply(`Hi, ${ctx.from.first_name}! Here are some important infos.`, {
+			ctx.reply(`Hi 👋, ${ctx.from.first_name}! Here are some important infos.`, {
 				reply_markup: {
 					inline_keyboard: [
 						[{ text: 'How to contribute', url: configurationService.homePageURL }],
