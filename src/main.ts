@@ -170,7 +170,7 @@ class Main {
 
 	private validateSession(ctx: ZorkContext, callback: Function): void {
 		if (ctx.session?.translation) {
-			callback(this);
+			callback(ctx);
 		} else {
 			ctx.reply('You must select a language first! Please, check your menu options.');
 		}
