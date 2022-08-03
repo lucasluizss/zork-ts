@@ -70,15 +70,22 @@ class Main {
 
 	private startBot(): void {
 		this.bot.start(ctx => {
+			this.mission(ctx);
 			this.languageSelection(ctx).catch(error => this.sendErrorMessage(error));
 		});
 	}
 
-	private async languageSelection(ctx: ZorkContext): Promise<Message.TextMessage> {
-		return await ctx.reply(
+	private async mission(ctx: ZorkContext): Promise<void> {
+		await ctx.reply(
 			`Hi, ${ctx?.from?.first_name}!
 			\n🎈 Welcome to Zork - The Unofficial TypeScript Version. 🎈
-			\nPlease select your language.\n(For available commands press /help)`,
+			\n> Your mission is to find the Jade Statue 🏆 \n`
+		);
+	}
+
+	private async languageSelection(ctx: ZorkContext): Promise<Message.TextMessage> {
+		return await ctx.reply(
+			`> Please select your language.\n(For available commands press /help)`,
 			Markup.keyboard(['🇧🇷 PT-BR', '🇺🇸 EN-US']).oneTime(true).resize()
 		);
 	}
@@ -144,11 +151,11 @@ class Main {
 			ctx.reply('Send /info to get info about the game');
 		});
 
-		this.bot.command('restart', ctx => this.restart(ctx));
+		this.bot.command('restart', ctx => this.validateSession(ctx, this.restart));
 
 		this.bot.command('language', ctx => this.languageSelection(ctx));
 
-		this.bot.command('chapter', ctx => this.currentChapter(ctx));
+		this.bot.command('chapter', ctx => this.validateSession(ctx, this.currentChapter));
 
 		this.bot.command('info', ctx => {
 			ctx.reply(`Hi, ${ctx.from.first_name}! Here are some important infos.`, {
@@ -161,10 +168,19 @@ class Main {
 		});
 	}
 
+	private validateSession(ctx: ZorkContext, callback: Function): void {
+		if (ctx.session) {
+			callback(this);
+		} else {
+			ctx.reply('You must select a language first! Please, check your menu options.');
+		}
+	}
+
 	private restart(ctx: ZorkContext): void {
 		this.iterator = this.chaptersGenerator();
 		this.resetUserAttempts();
 		ctx.session.currentChapter = this.iterator.next().value as Part;
+		this.mission(ctx);
 		this.currentChapter(ctx);
 	}
 
