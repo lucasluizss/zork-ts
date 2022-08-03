@@ -1,0 +1,44 @@
+{
+	"name": "zork-ts",
+	"version": "1.0.0",
+	"description": "",
+	"keywords": [
+		"zork",
+		"bot",
+		"telegram"
+	],
+	"homepage": "git+https://github.com/lucasluizss/zork-ts#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lucasluizss/zork-ts.git"
+	},
+	"license": "GPL-3.0",
+	"author": "Lucas Silva",
+	"main": "dist/main.js",
+	"scripts": {
+		"build": "tsc",
+		"start": "node dist/main.js",
+		"start:dev": "ts-node src/main.ts",
+		"start:console": "ts-node src/system/app.ts"
+	},
+	"dependencies": {
+		"dotenv": "^16.0.1",
+		"telegraf": "^4.4.2",
+		"telegraf-session-local": "^2.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^17.0.45",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.5"
+	},
+	"engines": {
+		"node": "17.0",
+		"npm": "8.1"
+	},
+	"pkg": {
+		"scripts": "require.js",
+		"assets": [
+			"src/assets/**/*"
+		]
+	}
+}

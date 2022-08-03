@@ -1,0 +1,99 @@
+{
+	"message": {
+		"What do you do? ": "\nO que você faz? ",
+		"Do you want to continue? (Y/N) ": "\nVocê deseja continuar? (S/N) ",
+		"Suicide": "Você se joga escada abaixo como uma tentativa de suicídio. Você morre. 💀",
+		"Game Over": "💀💀💀 Você Perdeu! 💀💀💀",
+		"Game Completed": "🎉 Você encontrou a Estátua de Jade 🏆 e completou sua missão! 🎉",
+		"Try again": "Continue tentando, sua resposta está #percent% correta... Você possui #attempts tentativas restantes...",
+		"I": "✅1️⃣✅ Oeste da casa 🏠\n Você está de pé em um campo aberto a oeste de uma casa branca, com uma porta da frente com tábuas. 🚪\n Há uma pequena caixa de correio aqui. 📫",
+		"II": "✅2️⃣✅ Esta é uma floresta, com árvores em todas as direções. A leste, parece haver luz do sol.",
+		"III": "✅3️⃣✅ Você está em uma clareira, com uma floresta ao seu redor por todos os lados. Um caminho leva ao sul. 🧭\nHá uma grade aberta, e escadas descendo para a escuridão.",
+		"IV": "✅4️⃣✅ Você está em uma pequena caverna com uma escada escura e proibida que leva para baixo.\n 💀 Há um esqueleto de um homem humano em um canto.",
+		"V": "✅5️⃣✅ Você entrou em uma sala com chão de barro.\n Deitado meio enterrado na lama está um baú velho, cheio de joias."
+	},
+	"availableAnswers": {
+		"I": [
+			"vou para o sudoeste",
+			"va para o sudoeste",
+			"ir para sudoeste",
+			"ir para o sudoeste",
+			"vou para sudoeste"
+		],
+		"II": [
+			"vou para o leste",
+			"va para o leste",
+			"ir para leste",
+			"ir para o leste",
+			"vou para leste"
+		],
+		"III": [
+			"desco as escadas",
+			"descer escada",
+			"descer as escadas",
+			"desca as escadas",
+			"desco pelas escadas",
+			"desco a escada"
+		],
+		"IV": [
+			"desco as escadas",
+			"descer escada",
+			"descer as escadas",
+			"desca as escadas",
+			"desco pelas escadas",
+			"desco a escada"
+		],
+		"V": ["abro o bau", "abrir bau", "abra o bau"]
+	},
+	"interactions": {
+		"I": {
+			"pegue a caixa de correio": "Está fortemente presa. 🔒",
+			"abrir caixa de correio": "Abrindo a pequena caixa de correio revela um folheto. 📜",
+			"va para o leste": "A porta está tapada e você não pode remover as tábuas.",
+			"abra a porta": "A porta não pode ser aberta.",
+			"abro a porta": "A porta não pode ser aberta.",
+			"pegue as tabuas": "As pranchas estão bem presas.",
+			"pego as tabuas": "As pranchas estão bem presas.",
+			"olho para casa": "🏠 A casa é uma bela casa colonial pintada de branco. É claro que os proprietários devem ter sido extremamente ricos.",
+			"olhar para casa": "A casa é uma bela casa colonial pintada de branco. É claro que os proprietários devem ter sido extremamente ricos.",
+			"ler folheto": "🎈 BEM-VINDO AO ZORK a versão não oficial escrita em TypeScript. 🎈\n ZORK é um jogo de aventura, perigo e pouca astúcia. ☠️ \n Nele você explorará alguns dos territórios mais incríveis já vistos pelos mortais. 🗺️ \n Nenhum computador deve ficar sem um! 💻",
+			"ler o folheto": "🎈 BEM-VINDO AO ZORK a versão não oficial escrita em TypeScript. 🎈\n ZORK é um jogo de aventura, perigo e pouca astúcia. ☠️ \n Nele você explorará alguns dos territórios mais incríveis já vistos pelos mortais. 🗺️ \n Nenhum computador deve ficar sem um! 💻",
+			"leia o folheto": "🎈 BEM-VINDO AO ZORK a versão não oficial escrita em TypeScript. 🎈\n ZORK é um jogo de aventura, perigo e pouca astúcia. ☠️ \n Nele você explorará alguns dos territórios mais incríveis já vistos pelos mortais. 🗺️ \n Nenhum computador deve ficar sem um! 💻",
+			"leio o folheto": "🎈 BEM-VINDO AO ZORK a versão não oficial escrita em TypeScript. 🎈\n ZORK é um jogo de aventura, perigo e pouca astúcia. ☠️ \n Nele você explorará alguns dos territórios mais incríveis já vistos pelos mortais. 🗺️ \n Nenhum computador deve ficar sem um! 💻",
+			"soltar folheto": "Solto.",
+			"solto folheto": "Solto."
+		},
+		"II": {
+			"va para oeste": "Você precisaria de um facão para ir mais para o oeste.",
+			"ir para oeste": "Você precisaria de um facão para ir mais para o oeste.",
+			"vou para oeste": "Você precisaria de um facão para ir mais para o oeste.",
+			"va para o norte": "⛰️ A floresta torna-se impenetrável ao norte.",
+			"ir para o norte": "⛰️ A floresta torna-se impenetrável ao norte.",
+			"vou para o norte": "⛰️ A floresta torna-se impenetrável ao norte.",
+			"va para o sul": "⛈️ Árvores lançadas pela tempestade bloqueiam seu caminho.",
+			"ir para o sul": "⛈️ Árvores lançadas pela tempestade bloqueiam seu caminho.",
+			"vou para o sul": "⛈️ Árvores lançadas pela tempestade bloqueiam seu caminho."
+		},
+		"III": {
+			"ilumine o quarto": "💡 Você precisaria de uma tocha ou lâmpada para fazer isso.",
+			"ilumino o quarto": "💡 Você precisaria de uma tocha ou lâmpada para fazer isso.",
+			"va para o sul": "👹 Você vê um grande ogro e se vira.",
+			"ir para o sul": "👹 Você vê um grande ogro e se vira.",
+			"vou para o sul": "👹 Você vê um grande ogro e se vira."
+		},
+		"IV": {
+			"pegue o esqueleto": "Por que você faria isso? Você é algum tipo de doente?",
+			"peguo o esqueleto": "Por que você faria isso? Você é algum tipo de doente?",
+			"esmague o esqueleto": "Pessoa doente. Tenha algum respeito amigo.",
+			"esmago o esqueleto": "Pessoa doente. Tenha algum respeito amigo.",
+			"ilumine o quarto": "💡 Você precisaria de uma tocha ou lâmpada para fazer isso.",
+			"ilumino o quarto": "💡 Você precisaria de uma tocha ou lâmpada para fazer isso.",
+			"quebrar o esqueleto": "Tenho duas perguntas: Por que e com o quê?",
+			"quebro o esqueleto": "Tenho duas perguntas: Por que e com o quê?"
+		},
+		"V": {
+			"abro o bau": "🏆🏆🏆"
+		}
+	},
+	"info": "/**\n ZORK I: The Great Underground Empire\n Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n ZORK is a registered trademark of Infocom, Inc.\n Revision 88 / Serial number 840726\n Source at: https://web.mit.edu/marleigh/www/portfolio/Files/zork/transcript.html\n/"
+}
