@@ -16,7 +16,7 @@ class ConfigurationService {
 	}
 
 	public get userMaximumAttempts(): number {
-		return parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '10') ?? 10;
+		return parseInt(process.env.USER_MAXIMUM_ATTEMPTS ?? '5') ?? 5;
 	}
 }
 
