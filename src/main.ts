@@ -172,7 +172,7 @@ class Main {
 		if (ctx.session?.translation) {
 			callback(ctx);
 		} else {
-			ctx.reply('You must select a language first! Please, check your menu options.');
+			ctx.reply('You must select a /language first! Please, check your menu options.');
 		}
 	}
 
