@@ -128,7 +128,7 @@ class Main {
 	}
 
 	private gameCompleted(ctx: ZorkContext, message: string): void {
-		this.resetUserAttempts();
+		this.resetState();
 		ctx.replyWithPhoto(configurationService.mapURI);
 		ctx.reply(
 			message,
@@ -177,11 +177,15 @@ class Main {
 	}
 
 	private restart(ctx: ZorkContext): void {
-		this.iterator = this.chaptersGenerator();
-		this.resetUserAttempts();
+		this.resetState();
 		ctx.session.currentChapter = this.iterator.next().value as Part;
 		this.mission(ctx);
 		this.currentChapter(ctx);
+	}
+
+	private resetState(): void {
+		this.iterator = this.chaptersGenerator();
+		this.resetUserAttempts();
 	}
 
 	private userInput(): void {
